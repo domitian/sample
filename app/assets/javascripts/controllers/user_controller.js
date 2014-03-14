@@ -3,9 +3,13 @@
 Familybook.UserController = Ember.ObjectController.extend({
     showadderrand: false,
     errandVar: '',
+    toggleProp: function(prop) {
+        this.toggleProperty(prop);
+    },
     actions: {
         errandAdd: function(user) {
-            this.toggleProperty('showadderrand');
+            // this.toggleProperty('showadderrand');
+            this.toggleProp('showadderrand');
             var a = this.store.createRecord('errand', {
                 title: '',
                 description: '',
@@ -15,13 +19,19 @@ Familybook.UserController = Ember.ObjectController.extend({
             });
             console.log(a);
             this.set('errandVar', a);
+
         },
         errandCancel: function() {
-            this.toggleProperty('showadderrand');
+            this.toggleProp('showadderrand');
             this.get('errandVar').deleteRecord();
         },
-        errandStore: function() {
-            // this.get('errandVar').save();
+        errandStore: function(user) {
+
+            this.get('errands').addObject(this.get('errandVar'));
+            this.get('errandVar').save();
+            this.toggleProp('showadderrand');
+            this.reload();
+            // this.
         }
     }
 });

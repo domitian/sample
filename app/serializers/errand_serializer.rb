@@ -1,3 +1,3 @@
 class ErrandSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :description, :location, :privy
 end

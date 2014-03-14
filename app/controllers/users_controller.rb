@@ -4,6 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-  	render json: User.find(1)
+  	render json: User.get_latest_errands(params[:id])
   end
 end
