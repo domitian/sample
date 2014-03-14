@@ -3,9 +3,9 @@
 Familybook.Router.map(function() {
     // this.resource('posts');
     this.resource('same');
-    this.resource('users', function() {
-        this.resource('user', {
-            path: 'user/:user_id'
-        });
+    this.resource('users');
+    this.resource('user', {
+        path: '/user/:user_id'
     });
+
 });
