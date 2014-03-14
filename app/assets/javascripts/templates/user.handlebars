@@ -1,7 +1,18 @@
 
-
-<button class='btn btn-primary btn-sm' {{action 'addErrand' on='click' target='view'}}> Add errand </button>
-{{#if view.showadderrand}}
-	{{view view.errandView}}
-	<button class='btn btn-danger btn-xs' {{action 'errandCancel' on='click' target='view'}}> Delete </button>
-{{/if}}
+<div class="row">
+  	<div class="col-md-2">
+  	</div>
+ 	<div class="col-md-8">
+		{{#if showadderrand}}
+			<div class="panel panel-default">
+			<div class="panel-body">
+				{{view view.errandView}}
+			</div>
+			</div>
+		{{else}}
+		<button class='btn btn-default btn-sm' {{action 'errandAdd' this on='click' }}> Add errand </button>
+		{{/if}}
+	</div>
+	<div class="col-md-2">
+	</div>
+</div>
