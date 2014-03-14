@@ -30,7 +30,7 @@ Familybook.UserController = Ember.ObjectController.extend({
             this.get('errands').addObject(this.get('errandVar'));
             this.get('errandVar').save();
             this.toggleProp('showadderrand');
-            this.reload();
+            // this.reload();
             // this.
         }
     }

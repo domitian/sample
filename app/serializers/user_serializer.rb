@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :record
+  attributes :id, :name, :record, :group_name, :group_id
   has_many :errands
   embed :ids, include: true 
 end

@@ -13,8 +13,8 @@
 		<button class='btn btn-default btn-sm' {{action 'errandAdd' this on='click' }}> Add errand </button>
 		{{/if}}
 		<hr>
-		{{#each rec in record}}
-			{{rec.title}} on {{rec.created_at}}<br>
+		{{#each rec in dates}}
+			{{rec.title}} on {{rec.updated_at}} <br>
 			{{rec.description}}
 			<hr>
 		{{/each}}
