@@ -1,5 +1,7 @@
-<h1>User</h1>
 
-<p>Your content here.</p>
 
-{{outlet}}
+<button class='btn btn-primary btn-sm' {{action 'addErrand' on='click' target='view'}}> Add errand </button>
+{{#if view.showadderrand}}
+	{{view view.errandView}}
+	<button class='btn btn-danger btn-xs' {{action 'errandCancel' on='click' target='view'}}> Delete </button>
+{{/if}}

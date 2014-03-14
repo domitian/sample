@@ -5,7 +5,7 @@ Familybook.Router.map(function() {
     this.resource('same');
     this.resource('users', function() {
         this.resource('user', {
-            path: ':user_id'
+            path: 'user/:user_id'
         });
     });
 });
