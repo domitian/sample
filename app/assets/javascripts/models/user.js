@@ -15,7 +15,7 @@ Familybook.User = DS.Model.extend({
             item.updated_at = new Date(item.updated_at);
             b.push(item);
         })
-        return b;
+        return b.reverse();
     }.property('record')
     // dates: function() {
     //     var errands = this.get('errands');

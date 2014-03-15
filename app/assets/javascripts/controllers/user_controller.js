@@ -37,6 +37,10 @@ Familybook.UserController = Ember.ObjectController.extend({
             this.toggleProp('showadderrand');
             // this.reload();
             // this.
+        },
+        refreshRec: function(user) {
+            user.reload();
+            this.set('recentAdded', []);
         }
     }
 });
