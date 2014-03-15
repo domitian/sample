@@ -13,13 +13,12 @@
 		<button class='btn btn-default btn-sm' {{action 'errandAdd' this on='click' }}> Add errand </button>
 		{{/if}}
 		<hr>
-		{{#each rec in dates}}
+		{{#each rec in sortedDates}}
 			{{rec.title}} on {{rec.updated_at}} <br>
-			{{rec.description}}
+			{{rec.description}} 
 			<hr>
-		{{/each}}
+		{{/each}}			
 	</div>
-
 	<div class="col-md-2">
 	</div>
 </div>

@@ -5,5 +5,7 @@ Familybook.Errand = DS.Model.extend({
     user: DS.belongsTo('user'),
     description: DS.attr('string'),
     privy: DS.attr('boolean'),
-    location: DS.attr('string')
+    location: DS.attr('string'),
+    updated_at: DS.attr('date'),
+    created_at: DS.attr('date')
 });
