@@ -17,8 +17,7 @@ Familybook.UserController = Ember.ObjectController.extend({
                 user: user,
                 privy: false,
                 location: '',
-                updated_at: Date(),
-                created_at: Date()
+                tag: ''
             });
             console.log(a);
             this.set('errandVar', a);

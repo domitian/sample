@@ -5,6 +5,6 @@ class ErrandsController < ApplicationController
 
   private
   	def get_params
-  		params.require(:errand).permit(:title,:user_id,:description,:privy,:location,:tags)
+  		params.require(:errand).permit(:title,:user_id,:description,:privy,:location,:tag)
   	end
 end

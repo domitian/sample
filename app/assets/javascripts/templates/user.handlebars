@@ -14,14 +14,17 @@
 		<button class='btn btn-primary btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button>
 		{{/if}}
 		<hr>
+		<div style="background-color:#E6E6FA" >
 		{{#each rec in controller.recentAdded}}
-			{{rec.title}} on {{rec.updated_at}} <br>
-			{{rec.description}} 
+
+			<p> {{rec.title}} on <i class='pull-right'> {{rec.updated_at}} </i>  </p>
+			{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
 			<hr>
-		{{/each}}			
+		{{/each}}	
+		</div>		
 		{{#each rec in recordFormat}}
-			{{rec.title}} on {{rec.updated_at}} <br>
-			{{rec.description}} 
+			{{rec.title}} on <i class='pull-right' {{rec.updated_at}} </i> <br>
+			{{rec.description}} &nbsp; &nbsp; tags: {{rec.tag}}
 			<hr>
 		{{/each}}			
 	</div>
