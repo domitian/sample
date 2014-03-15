@@ -3,6 +3,7 @@
 Familybook.UserController = Ember.ObjectController.extend({
     showadderrand: false,
     errandVar: '',
+    recentAdded: [],
     toggleProp: function(prop) {
         this.toggleProperty(prop);
     },
@@ -30,6 +31,8 @@ Familybook.UserController = Ember.ObjectController.extend({
         errandStore: function(user) {
 
             this.get('errands').addObject(this.get('errandVar'));
+            this.get('recentAdded').pushObject(this.get('errandVar'));
+            this.set('recentAdded', this.get('recentAdded').reverse());
             this.get('errandVar').save();
             this.toggleProp('showadderrand');
             // this.reload();

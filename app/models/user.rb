@@ -14,7 +14,10 @@ class User < ActiveRecord::Base
 				@rec.push(p)
 			end
 		end
-		@user.record = @rec
+		@user.errands.each do |k|
+			@rec.push(k)
+		end
+		@user.record = @rec.sort_by &:updated_at
 		@user
 	end
 end

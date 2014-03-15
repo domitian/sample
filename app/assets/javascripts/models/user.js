@@ -16,30 +16,30 @@ Familybook.User = DS.Model.extend({
             b.push(item);
         })
         return b;
-    }.property('record'),
-    dates: function() {
-        var errands = this.get('errands');
-        var record = this.get('recordFormat');
-        var c = [];
-        if (record.length != 0) {
-            record.forEach(function(item) {
-                // item.set('updated_at', new Date(item.updated_at));
-                c.pushObject(item);
-            });
-        }
-        if (errands.get('length') != 0) {
-            errands.forEach(function(item) {
-                c.pushObject(item);
-            });
-        }
-        console.log(c);
-        return c;
-    }.property('recordFormat.[]', 'errands.@each'),
-    sortedDates: function() {
-        console.log(this.get('dates').sortBy('updated_at'));
+    }.property('record')
+    // dates: function() {
+    //     var errands = this.get('errands');
+    //     var record = this.get('recordFormat');
+    //     var c = [];
+    //     if (record.length != 0) {
+    //         record.forEach(function(item) {
+    //             // item.set('updated_at', new Date(item.updated_at));
+    //             c.pushObject(item);
+    //         });
+    //     }
+    //     if (errands.get('length') != 0) {
+    //         errands.forEach(function(item) {
+    //             c.pushObject(item);
+    //         });
+    //     }
+    //     console.log(c);
+    //     return c;
+    // }.property('recordFormat.[]', 'errands.@each'),
+    // sortedDates: function() {
+    //     console.log(this.get('dates').sortBy('updated_at'));
 
-        return this.get('dates').sortBy('updated_at').reverse();
-    }.property('dates.[]', 'errands.@each')
+    //     return this.get('dates').sortBy('updated_at').reverse();
+    // }.property('dates.[]', 'errands.@each')
 
     // dates: function() {
     //     var ls = this.get('record');
