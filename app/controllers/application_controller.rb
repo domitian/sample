@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 	before_action :check_for_session, except: [:logout]
 
   	def check_for_session
-  		if session[:email].present?
+  		if session[:group_id].present?
   			puts "i have a session"
   		else
   			redirect_to :controller => 'home', :action => 'index'

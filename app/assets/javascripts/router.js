@@ -9,5 +9,7 @@ Familybook.Router.map(function() {
     this.resource('user', {
         path: '/user/:user_id'
     });
+    this.route('signup');
+    this.route('startup');
 
 });

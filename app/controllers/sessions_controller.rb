@@ -6,9 +6,24 @@ class SessionsController < ApplicationController
   	if info['hd'] != 'elitmus.com'
   		redirect_to :controller => 'home', :action => 'index'
   	else
+
+  		@user = User.find_by_email(info['email'])
   		session[:email] = info['email']
-  		puts "#{info.inspect}"
-  		redirect_to '/#/user/1'
+  		session[:name] = info['name']
+  		if @user == nil
+  			puts "i am inside nil user"
+  			# @user = User.new(name: info['name'], email: info['email'])
+  			# session[:id] = @user.id
+  			redirect_to '/#signup'
+  		elsif @user.group_id == nil
+  			puts "i am inside nil groupid"
+  			redirect_to '#signup'
+  		else
+  			session[:id] = @user.id
+  			session[:group_id] = @user.group_id
+  			redirect_to '/#/user/' + @user.id.to_s
+  		end
+
   	end
 
   end
