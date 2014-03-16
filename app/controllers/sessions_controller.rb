@@ -4,13 +4,13 @@ class SessionsController < ApplicationController
   def create
   	info = request.env['omniauth.auth'].extra.raw_info
   	if info['hd'] != 'elitmus.com'
-  		render :controller => 'home', :action => 'index'
+  		redirect_to :controller => 'home', :action => 'index'
   	else
   		session[:email] = info['email']
+  		puts "#{info.inspect}"
+  		redirect_to '/#/user/1'
   	end
-  	# session[:email] = 
-  	puts "#{info.inspect}"
-  	redirect_to '/#/user/1'
+
   end
 
 

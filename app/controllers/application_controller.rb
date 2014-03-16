@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   		if session[:email].present?
   			puts "i have a session"
   		else
-  			render :controller => 'home', :action => 'index'
+  			redirect_to :controller => 'home', :action => 'index'
   		end
   	end
 
@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   		[:email].each do |k|
   			session.delete k
   		end
-  		render :controller => 'home', :action => 'index'
+  		redirect_to :controller => 'home', :action => 'index'
   	end
 end
