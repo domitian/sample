@@ -2,7 +2,9 @@
 
 Familybook.Router.map(function() {
     // this.resource('posts');
-    this.resource('same');
+    this.route('login', {
+        path: '/'
+    });
     this.resource('users');
     this.resource('user', {
         path: '/user/:user_id'

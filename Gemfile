@@ -20,7 +20,8 @@ gem 'ember-rails'
 gem 'ember-source', '1.4.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
