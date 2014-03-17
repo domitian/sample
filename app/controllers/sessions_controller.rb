@@ -11,12 +11,10 @@ class SessionsController < ApplicationController
   		session[:email] = info['email']
   		session[:name] = info['name']
   		if @user == nil
-  			puts "i am inside nil user"
   			# @user = User.new(name: info['name'], email: info['email'])
   			# session[:id] = @user.id
   			redirect_to '/#signup'
   		elsif @user.group_id == nil
-  			puts "i am inside nil groupid"
   			redirect_to '#signup'
   		else
         flash[:login_alert] = 'you are logged in'

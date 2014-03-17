@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessor :record
+	attr_accessor :record, :approval_list
 	has_many :errands
 
 	belongs_to :group
@@ -19,5 +19,13 @@ class User < ActiveRecord::Base
 		end
 		@user.record = @rec.sort_by &:updated_at
 		@user
+	end
+
+	def self.get_pending_approval_list(id)
+		@user = User.find(id)
+		@group = Group.find(@user.group_id)
+		@user_list = @group.users.select('name,id,group_id')
+		@user.approval_list = @user_list.where(:is_approved => nil)
+		return @user
 	end
 end

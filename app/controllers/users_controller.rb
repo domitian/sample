@@ -16,6 +16,6 @@ skip_before_filter :check_for_session, :only => :create
   end
   private
   	def get_params
-  		params.require(:user).permit(:group_id,:name,:email)
+  		params.require(:user).permit(:group_id,:name,:email,:is_approved)
   	end
 end
