@@ -13,11 +13,15 @@ Familybook.User = DS.Model.extend({
     approved_by: DS.attr('number'),
     recordFormat: function() {
         var record = this.get('record');
+        var userList = this.get('approval_list');
         var b = [];
         if (record != null) {
             record.forEach(function(item) {
                 item.updated_at = new Date(item.updated_at);
-                b.push(item);
+                b.push({
+                    'written_by': 'someone',
+                    'errand': item
+                });
             });
         }
         return b.reverse();
@@ -30,7 +34,7 @@ Familybook.User = DS.Model.extend({
                 if (user.is_approved == false) {
                     unApprovedList.pushObject(user);
                 }
-            })
+            });
         }
         return unApprovedList;
     }.property('approval_list')

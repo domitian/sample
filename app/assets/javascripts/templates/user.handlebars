@@ -25,13 +25,13 @@
 			{{#each rec in controller.recentAdded}}
 
 				<p> {{rec.title}} on <i class='pull-right'> {{rec.updated_at}} </i>  </p>
-				{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
+				{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.errand.tag}}
 				<hr>
 			{{/each}}	
 			</div>		
 			{{#each rec in recordFormat}}
-				{{rec.title}} on <i class='pull-right' {{rec.updated_at}} </i> <br>
-				{{rec.description}} &nbsp; &nbsp; tags: {{rec.tag}}
+				{{rec.errand.title}} on <i class='pull-right' {{rec.errand.updated_at}} </i> <br>
+				{{rec.errand.description}} by {{rec.written_by}} &nbsp; &nbsp; tags: {{rec.errand.tag}}
 				<hr>
 			{{/each}}	
 		{{else}}	
