@@ -14,12 +14,16 @@ Familybook.User = DS.Model.extend({
     recordFormat: function() {
         var record = this.get('record');
         var userList = this.get('approval_list');
+        var shortList = {}; //storing the userlist in a short form for easier access
+        userList.forEach(function(user) {
+            shortList[user.id] = user.name
+        });
         var b = [];
         if (record != null) {
             record.forEach(function(item) {
                 item.updated_at = new Date(item.updated_at);
                 b.push({
-                    'written_by': 'someone',
+                    'written_by': shortList[item.user_id],
                     'errand': item
                 });
             });
