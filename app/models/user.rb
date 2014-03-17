@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
 		if @user.is_approved == true
 
 			@group = Group.find(@user.group_id)
-			@user_list = @group.users.select('name,id,group_id')
+			@user_list = @group.users.select('name,id,group_id,is_approved')
 			puts "#{@user_list}"
-			@user.approval_list = @user_list.where(:is_approved => false)
+			@user.approval_list = @user_list
 			@group =  User.where(:group_id => @user.group_id)
 			@group = @group.where.not(id: id)
 			@rec = []

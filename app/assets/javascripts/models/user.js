@@ -21,7 +21,19 @@ Familybook.User = DS.Model.extend({
             });
         }
         return b.reverse();
-    }.property('record')
+    }.property('record'),
+    unApproved: function() {
+        var userList = this.get('approval_list');
+        var unApprovedList = [];
+        if (userList != null) {
+            userList.forEach(function(user) {
+                if (user.is_approved == false) {
+                    unApprovedList.pushObject(user);
+                }
+            })
+        }
+        return unApprovedList;
+    }.property('approval_list')
     // dates: function() {
     //     var errands = this.get('errands');
     //     var record = this.get('recordFormat');

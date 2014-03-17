@@ -16,7 +16,7 @@
 		{{#if is_approved}}
 			<hr>
 			<div  >
-				{{#each rec in approval_list}}
+				{{#each rec in unApproved}}
 					<div class='alert alert-danger'> Does  {{rec.name}} belong to your family? if yes, <button class='btn btn-success btn-sm' {{action 'approveUser' rec on='click'}}> Approve </button> </div>
 				{{/each}}
 			</div>
