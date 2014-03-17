@@ -9,6 +9,8 @@ Familybook.User = DS.Model.extend({
     group_name: DS.attr('string'),
     group: DS.belongsTo('group'),
     approval_list: DS.attr(''),
+    is_approved: DS.attr('boolean'),
+    approved_by: DS.attr('number'),
     recordFormat: function() {
         var record = this.get('record');
         var b = [];

@@ -13,20 +13,30 @@
 		<button class='btn btn-default btn-sm' {{action 'errandAdd' this on='click' }}> Add errand </button>
 		<button class='btn btn-primary btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button>
 		{{/if}}
-		<hr>
-		<div style="background-color:#E6E6FA" >
-		{{#each rec in controller.recentAdded}}
+		{{#if is_approved}}
+			<hr>
+			<div  >
+				{{#each rec in approval_list}}
+					<div class='alert alert-danger'> Does  {{rec.name}} belong to your family? if yes, <button class='btn btn-success btn-sm' {{action 'approveUser' rec on='click'}}> Approve </button> </div>
+				{{/each}}
+			</div>
+			<hr>
+			<div style="background-color:#E6E6FA" >
+			{{#each rec in controller.recentAdded}}
 
-			<p> {{rec.title}} on <i class='pull-right'> {{rec.updated_at}} </i>  </p>
-			{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
-			<hr>
-		{{/each}}	
-		</div>		
-		{{#each rec in recordFormat}}
-			{{rec.title}} on <i class='pull-right' {{rec.updated_at}} </i> <br>
-			{{rec.description}} &nbsp; &nbsp; tags: {{rec.tag}}
-			<hr>
-		{{/each}}			
+				<p> {{rec.title}} on <i class='pull-right'> {{rec.updated_at}} </i>  </p>
+				{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
+				<hr>
+			{{/each}}	
+			</div>		
+			{{#each rec in recordFormat}}
+				{{rec.title}} on <i class='pull-right' {{rec.updated_at}} </i> <br>
+				{{rec.description}} &nbsp; &nbsp; tags: {{rec.tag}}
+				<hr>
+			{{/each}}	
+		{{else}}	
+		 	<div class="alert alert-success">You need to be approved by family </div>	
+		 {{/if}}
 	</div>
 	<div class="col-md-2">
 		

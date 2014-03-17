@@ -40,6 +40,16 @@ Familybook.UserController = Ember.ObjectController.extend({
         refreshRec: function(user) {
             user.reload();
             this.set('recentAdded', []);
+        },
+        approveUser: function(user) {
+            var approvalUser = this.store.push('user', {
+                id: user.id,
+                is_approved: true,
+                approved_by: this.get('id')
+
+            });
+            approvalUser.save();
+
         }
     }
 });

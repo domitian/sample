@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317065331) do
+ActiveRecord::Schema.define(version: 20140317103157) do
 
   create_table "errands", force: true do |t|
     t.integer  "user_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140317065331) do
     t.string   "group_name"
     t.string   "email"
     t.boolean  "is_approved"
+    t.integer  "approved_by"
   end
 
 end

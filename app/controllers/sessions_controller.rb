@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
 	skip_before_filter :check_for_session, :only => [:create, :unauthorized]
   def create
   	info = request.env['omniauth.auth'].extra.raw_info
-  	if info['hd'] != 'elitmus.com'
-  		redirect_to :controller => 'home', :action => 'index'
-  	else
+  	# if info['hd'] != 'elitmus.com'
+  	# 	redirect_to :controller => 'home', :action => 'index'
+  	# else
 
   		@user = User.find_by_email(info['email'])
   		session[:email] = info['email']
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   			redirect_to '/#/user/' + @user.id.to_s
   		end
 
-  	end
+  	# end
 
   end
 

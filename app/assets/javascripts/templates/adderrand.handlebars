@@ -7,12 +7,7 @@ Tags: {{input type="text" value=errandVar.tag size="50"}}
   {{view Ember.Checkbox checkedBinding="errandVar.privy"}}
   Only me
 </label> <hr>
-<label>
-  {{view Ember.Checkbox checkedBinding="reminder"}}
-  Reminder
-</label>
-{{#if reminder}}
-	need to show calendar here
-{{/if}}
+
+
 <button class='btn btn-success btn-sm' {{action 'errandStore' on='click' }}> Post </button>
 <button class='btn btn-danger btn-sm' {{action 'errandCancel' on='click' }}> Cancel </button><br>
