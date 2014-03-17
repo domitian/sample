@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :errands
   get 'auth/google_oauth2/callback', to: 'sessions#create'
   get 'auth/google_oauth2'
+  get 'auth/failure', to: 'sessions#unauthorized'
   get 'home/logout'
   resources :users
   root :to => 'home#index'

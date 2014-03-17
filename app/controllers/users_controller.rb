@@ -11,7 +11,8 @@ skip_before_filter :check_for_session, :only => :create
   def create
   	@user = User.create(name: session[:name],group_id: params[:user][:group_name].to_i,email: session[:email])
   	session[:group_id] = @user.group_id
-  	redirect_to '/#/user/'+ @user.id.to_s
+    flash[:just_signed_up] = 'Congrats, you can now start sharing your information with your group'
+  	render json: @user
   end
   private
   	def get_params

@@ -10,11 +10,13 @@ Familybook.User = DS.Model.extend({
     group: DS.belongsTo('group'),
     recordFormat: function() {
         var record = this.get('record');
-        var b = []
-        record.forEach(function(item) {
-            item.updated_at = new Date(item.updated_at);
-            b.push(item);
-        })
+        var b = [];
+        if (record != null) {
+            record.forEach(function(item) {
+                item.updated_at = new Date(item.updated_at);
+                b.push(item);
+            });
+        }
         return b.reverse();
     }.property('record')
     // dates: function() {

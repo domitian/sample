@@ -10,6 +10,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if flash[:login_alert] %>
+    <div class="alert alert-success">You are logged in </div>
+  <% end %>
+  <% if flash[:just_signed_up] %>
+  <div class="alert alert-success"><%= flash[:just_signed_up] %></div>
+  <% end %>
+  <% if flash[:logout] %>
+  <div class="alert alert-success"> <%= flash[:logout] %></div>
+  <% end %>
+
 <div class="row">
   	<div class="col-md-2">
   	</div>

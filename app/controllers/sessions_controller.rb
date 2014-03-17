@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   	# before_action :check_for_session, except: [:create]
-	skip_before_filter :check_for_session, :only => :create
+	skip_before_filter :check_for_session, :only => [:create, :unauthorized]
   def create
   	info = request.env['omniauth.auth'].extra.raw_info
   	if info['hd'] != 'elitmus.com'
@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
   			puts "i am inside nil groupid"
   			redirect_to '#signup'
   		else
+        flash[:login_alert] = 'you are logged in'
   			session[:id] = @user.id
   			session[:group_id] = @user.group_id
   			redirect_to '/#/user/' + @user.id.to_s
@@ -26,6 +27,10 @@ class SessionsController < ApplicationController
 
   	end
 
+  end
+
+  def unauthorized
+    flash[:message] = params[:message]
   end
 
 

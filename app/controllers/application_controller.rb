@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   		[:email].each do |k|
   			session.delete k
   		end
+      flash[:logout] = 'you have successfully logged out, please refresh the page'
   		redirect_to :controller => 'home', :action => 'index'
   	end
 end

@@ -10,8 +10,16 @@ Familybook.SignupController = Ember.Controller.extend({
             var user = this.store.createRecord('user', {
                 group_name: group
             });
-            user.save();
-            this.transitionTo('startup');
+            var self = this
+            var onSuccess = function(user) {
+                console.log('succes here');
+                self.transitionToRoute('user', user);
+            };
+            var onFail = function(user) {
+                console.log('failed');
+            }
+            user.save().then(onSuccess, onFail);
+
         }
     }
 });
