@@ -9,7 +9,14 @@ skip_before_filter :check_for_session, :only => :create
   end
 
   def create
-  	@user = User.new(name: session[:name],group_id: params[:user][:group_name].to_i,email: session[:email],is_approved: false,record: [])
+    @groupid = params[:user][:group_name]
+    @groupname = @groupid.split('?').first
+    @groupid = @groupid.split('?').last.to_i
+    if (@groupid == 0)
+      @groupid = Group.create(name: @groupname)
+      @groupid = @groupid.id
+    end
+  	@user = User.new(name: session[:name],group_id: @groupid,email: session[:email],is_approved: false,record: [])
   	session[:group_id] = @user.group_id
     if Group.find(session[:group_id]).users.count == 0
       @user.is_approved = true

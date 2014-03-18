@@ -4,11 +4,33 @@ Familybook.SignupController = Ember.Controller.extend({
     group: [{
         name: 'Technology',
         id: 2
+    }, {
+        name: 'Corporate Delivery',
+        id: 3
     }],
+    joinGroup: false,
+    getList: function() {
+        var gr = this.get('content');
+        var groupList = [];
+        gr.forEach(function(group) {
+            groupList.push(group.name);
+        })
+        console.log(groupList);
+        this.set('groupList', groupName);
+    },
     actions: {
-        groupchoose: function(group) {
+        groupChoose: function() {
+            var groupName = this.get('groupName');
+            var groupId = groupName + '?';
+            var content = this.get('content');
+            content.forEach(function(group) {
+                if (group.get('name') == groupName) {
+                    groupId = groupId + group.get('id');
+                }
+            })
+            console.log('the gorupid is ' + groupId)
             var user = this.store.createRecord('user', {
-                group_name: group
+                group_name: groupId
             });
             var self = this
             var onSuccess = function(user) {
@@ -19,6 +41,23 @@ Familybook.SignupController = Ember.Controller.extend({
                 console.log('failed');
             }
             user.save().then(onSuccess, onFail);
+
+        },
+        checkForGroup: function() {
+            // this.get('getList');
+            var gr = this.get('content');
+            var groupList = [];
+            gr.forEach(function(group) {
+                groupList.push(group.get('name'));
+            })
+            if (groupList.contains(this.get('groupName'))) {
+                this.set('joinGroup', true);
+            } else {
+                this.set('joinGroup', false);
+            }
+        },
+        groupCreate: function() {
+            var groupName = this.get('groupName');
 
         }
     }

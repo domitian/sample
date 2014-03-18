@@ -15,6 +15,9 @@ Familybook.User = DS.Model.extend({
         var record = this.get('record');
         var userList = this.get('approval_list');
         var shortList = {}; //storing the userlist in a short form for easier access
+        if (userList == null) {
+            userList = [];
+        }
         userList.forEach(function(user) {
             shortList[user.id] = user.name
         });

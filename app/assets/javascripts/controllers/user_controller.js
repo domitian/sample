@@ -9,6 +9,7 @@ Familybook.UserController = Ember.ObjectController.extend({
     toggleProp: function(prop) {
         this.toggleProperty(prop);
     },
+
     actions: {
         errandAdd: function(user) {
             // this.toggleProperty('showadderrand');
