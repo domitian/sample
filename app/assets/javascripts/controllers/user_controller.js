@@ -4,6 +4,8 @@ Familybook.UserController = Ember.ObjectController.extend({
     showadderrand: false,
     errandVar: '',
     recentAdded: [],
+    newListOrder: [],
+    defaultView: true,
     toggleProp: function(prop) {
         this.toggleProperty(prop);
     },
@@ -50,6 +52,52 @@ Familybook.UserController = Ember.ObjectController.extend({
             });
             approvalUser.save();
 
+        },
+        showBy: function(sortItem, user, showType) {
+            this.set('defaultView', false);
+            if (this.get('recentAdded') != []) {
+                user.reload();
+                this.set('recentAdded', []);
+            }
+            var record = this.get('record');
+            var userList = this.get('approval_list');
+            var shortList = {}; //storing the userlist in a short form for easier access
+            userList.forEach(function(user) {
+                shortList[user.id] = user.name
+            });
+            var b = [];
+            console.log('no problem here');
+            if (record != null) {
+                record.forEach(function(item) {
+                    if (showType == 'tags') {
+                        if (item.tag.contains(sortItem)) {
+                            b.push({
+                                'written_by': shortList[item.user_id],
+                                'errand': item,
+                                'id': item.user_id
+                            });
+                        }
+                    } else if (showType == 'user') {
+                        console.log(sortItem);
+                        if (item.user_id == Number(sortItem)) {
+                            b.push({
+                                'written_by': shortList[item.user_id],
+                                'errand': item,
+                                'id': item.user_id
+                            });
+                        }
+                    }
+                });
+            }
+            this.set('newListOrder', b);
+            // return b.reverse();
+        },
+        backToDefault: function(user) {
+            this.set('defaultView', true);
+            if (this.get('recentAdded') != []) {
+                user.reload();
+                this.set('recentAdded', []);
+            }
         }
     }
 });

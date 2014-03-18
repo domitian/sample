@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   	end
 
   	def logout
-  		[:email].each do |k|
+  		[:email,:name,:id,:group_id].each do |k|
   			session.delete k
   		end
       flash[:logout] = 'you have successfully logged out, please refresh the page'
