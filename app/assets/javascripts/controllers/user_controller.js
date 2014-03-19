@@ -22,7 +22,6 @@ Familybook.UserController = Ember.ObjectController.extend({
                 location: '',
                 tag: ''
             });
-            console.log(a);
             this.set('errandVar', a);
 
         },

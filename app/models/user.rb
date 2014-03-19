@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	attr_accessor :record, :approval_list
 	has_many :errands
-
+	validates :email, uniqueness: {case_sensitive: false}
 	belongs_to :group
 	def self.get_latest_errands(id)
 		@user = User.find(id)

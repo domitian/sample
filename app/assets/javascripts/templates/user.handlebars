@@ -4,7 +4,6 @@
 
   	</div>
  	<div class="col-md-8">
-		<input type="hidden" id="e2" style="width:300px"/>
  		<hr>
 		{{#if showadderrand}}
 			<div class="panel panel-default">
@@ -23,18 +22,19 @@
 					<div class='alert alert-danger'> Does  {{rec.name}} belong to your family? if yes, <button class='btn btn-success btn-sm' {{action 'approveUser' rec on='click'}}> Approve </button> </div>
 				{{/each}}
 			</div>
-			<hr>
+
 			<div style="background-color:#E6E6FA" >
 			{{#each rec in controller.recentAdded}}
-
+				<hr>
 				<p> {{rec.title}} on <i class='pull-right'> {{rec.updated_at}} </i>  </p>
 				{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
-				<hr>
+				
 			{{/each}}	
 			</div>		
 			{{#if defaultView}}
 
 				{{#each rec in recordFormat}}
+					<hr>
 					{{rec.errand.title}} on <i class='pull-right' {{rec.errand.updated_at}} </i> <br>
 					{{rec.errand.description}} by 
 					<a {{action 'showBy' rec.id this 'user' on='click'}}> {{rec.written_by}} </a> &nbsp; &nbsp;
@@ -45,9 +45,9 @@
 					 		</button>
 					 	{{/each}}
 					 </span>
-					<hr>
 				{{/each}}
 			{{else}}
+
 				<button class='btn btn-primary btn-sm' {{action 'backToDefault' this on='click'}}> 
 					<i class="fa fa-long-arrow-left"></i> Back To Dashboard 
 				</button>
