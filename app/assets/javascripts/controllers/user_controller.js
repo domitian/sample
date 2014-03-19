@@ -6,6 +6,10 @@ Familybook.UserController = Ember.ObjectController.extend({
     recentAdded: [],
     newListOrder: [],
     defaultView: true,
+    selectedUser: {
+        id: 0,
+        username: 'all'
+    },
     toggleProp: function(prop) {
         this.toggleProperty(prop);
     },
@@ -60,11 +64,7 @@ Familybook.UserController = Ember.ObjectController.extend({
                 this.set('recentAdded', []);
             }
             var record = this.get('record');
-            var userList = this.get('approval_list');
-            var shortList = {}; //storing the userlist in a short form for easier access
-            userList.forEach(function(user) {
-                shortList[user.id] = user.name
-            });
+            var shortList = this.get('uniqueUserList');
             var b = [];
             console.log('no problem here');
             if (record != null) {

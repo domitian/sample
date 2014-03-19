@@ -46,7 +46,33 @@ Familybook.User = DS.Model.extend({
             });
         }
         return unApprovedList;
-    }.property('approval_list')
+    }.property('approval_list'),
+    uniqueUserList: function() {
+        var userList = this.get('approval_list');
+        var shortList = {}; //storing the userlist in a short form for easier access
+        if (userList == null) {
+            userList = [];
+        }
+        userList.forEach(function(user) {
+            shortList[user.id] = user.name
+        });
+        return shortList;
+    }.property('approval_list'),
+    uniqueUserListHash: function() {
+        var list = this.get('uniqueUserList');
+        var arrlist = [];
+        arrlist.push({
+            id: 0,
+            username: 'all'
+        });
+        for (var keyval in list) {
+            arrlist.push({
+                id: keyval,
+                username: list[keyval]
+            })
+        }
+        return arrlist;
+    }.property('uniqueUserList')
     // dates: function() {
     //     var errands = this.get('errands');
     //     var record = this.get('recordFormat');

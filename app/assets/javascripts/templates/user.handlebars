@@ -15,6 +15,9 @@
 		<button class='btn btn-default btn-sm' {{action 'errandAdd' this on='click' }}> Add errand </button>
 		<button class='btn btn-primary btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button>
 		{{/if}}
+		<hr>
+
+		{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser.id}}
 		{{#if is_approved}}
 			<hr>
 			<div  >
