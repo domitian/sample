@@ -1,9 +1,4 @@
 
-<div class="row">
-  	<div class="col-md-2">
-
-  	</div>
- 	<div class="col-md-8">
  		<hr>
 		{{#if showadderrand}}
 			<div class="panel panel-default">
@@ -12,8 +7,19 @@
 			</div>
 			</div>
 		{{else}}
-		<button class='btn btn-default btn-sm' {{action 'errandAdd' this on='click' }}> Post Information </button>
-		<button class='btn btn-primary btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button>
+		<div class="btn-group btn-group-justified">
+			<div class='btn-group'>
+			<button class='btn btn-success btn-lg' {{action 'errandAdd' this on='click' }}> Post Information </button> 
+			</div>
+			<div class='btn-group'>
+			<button class='btn btn-default btn-lg ' {{action 'refreshRec' this on='click' }}> Refresh </button> 
+			</div>
+			<div class='btn-group'>
+			<button class='btn btn-primary'> 
+				{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser}}
+			</button>
+			</div>
+		</div>
 		{{/if}}
 		<hr>
 
@@ -29,7 +35,7 @@
 			<div style="background-color:#E6E6FA" >
 			{{#each rec in controller.recentAdded}}
 				<hr>
-				<p> {{rec.title}} on <i class='pull-right'> {{rec.updated_at}} </i>  </p>
+				<p> {{rec.title}} <font size='1'> <i class='pull-right'> {{rec.updated_at}} </i> </font> </p>
 				{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
 				
 			{{/each}}	
@@ -38,7 +44,7 @@
 
 				{{#each rec in recordFormat}}
 					<hr>
-					{{rec.errand.title}} on <i class='pull-right' {{rec.errand.updated_at}} </i> <br>
+					{{rec.errand.title}} on <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font><br>
 					{{rec.errand.description}} by 
 					<a {{action 'showBy' rec.id this 'user' on='click'}}> {{rec.written_by}} </a> &nbsp; &nbsp;
 					 <span > 
@@ -64,8 +70,7 @@
 		{{else}}	
 		 	<div class="alert alert-success">You need to be approved by family </div>	
 		 {{/if}}
-	</div>
-	<div class="col-md-2">
-		
-	</div>
-</div>
+		 <hr>
+		<p><button class='btn btn-primary' {{action 'geoFindMe' on='click'}}>Show my location</button></p>
+		<div id="out"></div>
+

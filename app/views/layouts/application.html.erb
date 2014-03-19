@@ -6,10 +6,18 @@
   <%= javascript_include_tag "application" %>
   <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-2 col-xs-2 col-sm-2">
+
+    </div>
+  <div class="col-md-8 col-xs-14 col-sm-8">
   <% if flash[:login_alert] %>
     <div class="alert alert-success">You are logged in </div>
   <% end %>
@@ -19,15 +27,13 @@
   <% if flash[:logout] %>
   <div class="alert alert-success"> <%= flash[:logout] %></div>
   <% end %>
-
-<div class="row">
-  	<div class="col-md-2">
-  	</div>
- 	<div class="col-md-8">
 		<%= yield %>
-	</div>
-	<div class="col-md-2">
-	</div>
+<div class="clearfix"></div>
+  </div>
+  <div class="col-md-2 col-xs-2 col-sm-2">
+    
+  </div>
+</div>
 </div>
 
 
