@@ -129,17 +129,20 @@ Familybook.UserController = Ember.ObjectController.extend({
         },
         geoFindMe: function(user) {
             var output = document.getElementById("out");
+            var recentAdded = this.get('recentAdded');
+            var errands = user.get('errands');
             var self = this;
             if (!navigator.geolocation) {
                 output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
                 return;
             }
 
+
             function success(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
                 var errandLocation = self.store.createRecord('errand', {
-                    title: 'My current Location',
+                    title: user.get('name') + ' @',
                     description: '',
                     user: user,
                     privy: false,
@@ -150,9 +153,10 @@ Familybook.UserController = Ember.ObjectController.extend({
                     tag: 'location'
                 });
 
-                // self.get('errands').addObject(errandLocation);
-                // self.get('recentAdded').pushObject(errandLocation);
-                // self.set('recentAdded', self.get('recentAdded').reverse());
+                errands.addObject(errandLocation);
+                recentAdded.pushObject(errandLocation);
+                console.log('error here');
+                self.set('recentAdded', self.get('recentAdded').reverse());
                 errandLocation.save();
             };
 
@@ -160,7 +164,7 @@ Familybook.UserController = Ember.ObjectController.extend({
                 output.innerHTML = "Unable to retrieve your location";
             };
 
-            output.innerHTML = "<p>Locating…</p>";
+            // output.innerHTML = "<p>Locating…</p>";
 
             navigator.geolocation.getCurrentPosition(success, error);
         }
