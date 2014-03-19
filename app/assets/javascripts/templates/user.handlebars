@@ -38,8 +38,12 @@
 			{{#each rec in controller.recentAdded}}
 				<hr>
 				<p> {{rec.title}} <font size='1'> <i class='pull-right'> {{rec.updated_at}} </i> </font> </p>
-				{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
-				
+					{{#if rec.locate}}
+						{{showLocation rec.errand.location}}
+					{{else}}
+
+						{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
+					{{/if}}
 			{{/each}}	
 			</div>		
 			{{#if defaultView}}
@@ -47,6 +51,9 @@
 				{{#each rec in recordFormat}}
 					<hr>
 					{{rec.errand.title}} on <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font><br>
+					{{#if rec.locate}}
+						{{showLocation rec.errand.location}}
+					{{else}}
 					{{rec.errand.description}} by 
 					<a {{action 'showBy' rec.id this 'user' on='click'}}> {{rec.written_by}} </a> &nbsp; &nbsp;
 					 <span > 
@@ -56,6 +63,7 @@
 					 		</button>
 					 	{{/each}}
 					 </span>
+					 {{/if}}
 				{{/each}}
 			{{else}}
 				{{#if controller.byTags}}

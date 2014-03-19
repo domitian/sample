@@ -50,7 +50,8 @@ Familybook.UserController = Ember.ObjectController.extend({
                 user: user,
                 privy: false,
                 location: '',
-                tag: ''
+                tag: '',
+                errand_type: 0
             });
             this.set('errandVar', a);
 
@@ -150,14 +151,18 @@ Familybook.UserController = Ember.ObjectController.extend({
                         "latitude": latitude,
                         "longitude": longitude
                     },
-                    tag: 'location'
+                    tag: 'location',
+                    errand_type: 1
                 });
 
                 errands.addObject(errandLocation);
                 recentAdded.pushObject(errandLocation);
                 console.log('error here');
                 self.set('recentAdded', self.get('recentAdded').reverse());
-                errandLocation.save();
+                errandLocation.save().then(function(use) {
+                    user.reload();
+                    self.set('recentAdded', []);
+                })
             };
 
             function error() {

@@ -8,5 +8,6 @@ Familybook.Errand = DS.Model.extend({
     location: DS.attr(''),
     tag: DS.attr('string'),
     updated_at: DS.attr('date'),
-    created_at: DS.attr('date')
+    created_at: DS.attr('date'),
+    errand_type: DS.attr('number')
 });

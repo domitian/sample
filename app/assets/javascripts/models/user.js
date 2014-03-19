@@ -28,11 +28,21 @@ Familybook.User = DS.Model.extend({
                 item.updated_at = new Date(item.updated_at);
                 item.tag = item.tag.replace(/ /g, "");
                 item.tag = item.tag.split(',');
-                b.push({
-                    'written_by': shortList[item.user_id],
-                    'errand': item,
-                    'id': item.user_id
-                });
+                if (item.errand_type == 1) {
+                    b.push({
+                        'locate': true,
+                        'written_by': shortList[item.user_id],
+                        'errand': item,
+                        'id': item.user_id
+                    });
+                } else {
+                    b.push({
+                        'locate': false,
+                        'written_by': shortList[item.user_id],
+                        'errand': item,
+                        'id': item.user_id
+                    });
+                }
             });
         }
         return b.reverse();

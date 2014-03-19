@@ -6,7 +6,7 @@ class ErrandsController < ApplicationController
 
   private
   	def get_params
-  		params.require(:errand).permit(:title,:user_id,:description,:privy,{:location => [:latitude,:longitude]},:tag)
+  		params.require(:errand).permit(:title,:user_id,:description,:privy,{:location => [:latitude,:longitude]},:tag,:errand_type)
   	
   	end
 end
