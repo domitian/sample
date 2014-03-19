@@ -21,6 +21,7 @@ Familybook.SignupController = Ember.Controller.extend({
     actions: {
         groupChoose: function() {
             var groupName = this.get('groupName');
+            groupName = groupName.toLowerCase();
             var groupId = groupName + '?';
             var content = this.get('content');
             content.forEach(function(group) {
@@ -50,7 +51,7 @@ Familybook.SignupController = Ember.Controller.extend({
             gr.forEach(function(group) {
                 groupList.push(group.get('name'));
             })
-            if (groupList.contains(this.get('groupName'))) {
+            if (groupList.contains(this.get('groupName').toLowerCase())) {
                 this.set('joinGroup', true);
             } else {
                 this.set('joinGroup', false);

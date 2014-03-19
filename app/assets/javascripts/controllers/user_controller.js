@@ -6,13 +6,39 @@ Familybook.UserController = Ember.ObjectController.extend({
     recentAdded: [],
     newListOrder: [],
     defaultView: true,
-    selectedUser: {
-        id: 0,
-        username: 'all'
-    },
+    byTags: true,
+    selectedUser: 0,
     toggleProp: function(prop) {
         this.toggleProperty(prop);
     },
+    selectedUserChange: function() {
+
+        var record = this.get('record');
+        this.set('byTags', false);
+        var shortList = this.get('uniqueUserList');
+        var b = [];
+        var self = this;
+        var selectedUser = this.get('selectedUser')
+        console.log('no problem here');
+        if (record != null) {
+            record.forEach(function(item) {
+                if (selectedUser != 0) {
+                    // console.log(sortItem);
+                    self.set('defaultView', false);
+                    if (item.user_id == selectedUser) {
+                        b.push({
+                            'written_by': shortList[item.user_id],
+                            'errand': item,
+                            'id': item.user_id
+                        });
+                    }
+                } else {
+                    self.set('defaultView', true);
+                }
+            });
+        }
+        this.set('newListOrder', b);
+    }.observes('selectedUser'),
 
     actions: {
         errandAdd: function(user) {
@@ -59,6 +85,7 @@ Familybook.UserController = Ember.ObjectController.extend({
         },
         showBy: function(sortItem, user, showType) {
             this.set('defaultView', false);
+            this.set('byTags', true);
             if (this.get('recentAdded') != []) {
                 user.reload();
                 this.set('recentAdded', []);
