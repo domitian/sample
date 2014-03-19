@@ -97,6 +97,7 @@ Familybook.UserController = Ember.ObjectController.extend({
             if (record != null) {
                 record.forEach(function(item) {
                     if (showType == 'tags') {
+                        console.log(item.tag);
                         if (item.tag.contains(sortItem)) {
                             b.push({
                                 'written_by': shortList[item.user_id],
@@ -126,9 +127,9 @@ Familybook.UserController = Ember.ObjectController.extend({
                 this.set('recentAdded', []);
             }
         },
-        geoFindMe: function() {
+        geoFindMe: function(user) {
             var output = document.getElementById("out");
-
+            var self = this;
             if (!navigator.geolocation) {
                 output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
                 return;
@@ -137,13 +138,22 @@ Familybook.UserController = Ember.ObjectController.extend({
             function success(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
+                var errandLocation = self.store.createRecord('errand', {
+                    title: 'My current Location',
+                    description: '',
+                    user: user,
+                    privy: false,
+                    location: {
+                        "latitude": latitude,
+                        "longitude": longitude
+                    },
+                    tag: 'location'
+                });
 
-                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-                var img = new Image();
-                img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-                output.appendChild(img);
+                // self.get('errands').addObject(errandLocation);
+                // self.get('recentAdded').pushObject(errandLocation);
+                // self.set('recentAdded', self.get('recentAdded').reverse());
+                errandLocation.save();
             };
 
             function error() {

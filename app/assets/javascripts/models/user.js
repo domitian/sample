@@ -11,6 +11,7 @@ Familybook.User = DS.Model.extend({
     approval_list: DS.attr(''),
     is_approved: DS.attr('boolean'),
     approved_by: DS.attr('number'),
+
     recordFormat: function() {
         var record = this.get('record');
         var userList = this.get('approval_list');
@@ -25,6 +26,7 @@ Familybook.User = DS.Model.extend({
         if (record != null) {
             record.forEach(function(item) {
                 item.updated_at = new Date(item.updated_at);
+                item.tag = item.tag.replace(/ /g, "");
                 item.tag = item.tag.split(',');
                 b.push({
                     'written_by': shortList[item.user_id],

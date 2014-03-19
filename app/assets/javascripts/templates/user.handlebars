@@ -13,7 +13,7 @@
 			</div>
 
 			<div class='btn-group'>
-			<button class='btn btn-info btn-lg' {{action 'geoFindMe' on='click'}}>Show my location</button>
+			<button class='btn btn-info btn-lg' {{action 'geoFindMe' this on='click'}}>Share my location</button>
 			</div>
 			<div class='btn-group'>
 			<button class='btn btn-danger btn-lg ' {{action 'refreshRec' this on='click' }}> Refresh </button> 
@@ -21,10 +21,11 @@
 
 		</div>
 		{{/if}}
-			<div id="out"></div>
+		<div id="out"></div>
 		<hr>
-
-		{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser}}
+		<div class='pull-right'>
+		<b>Display by </b>{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser}}
+		</div>
 		{{#if is_approved}}
 			<hr>
 			<div  >
@@ -72,6 +73,4 @@
 		 	<div class="alert alert-success">You need to be approved by family </div>	
 		 {{/if}}
 		 <hr>
-		<p><button class='btn btn-primary' {{action 'geoFindMe' on='click'}}>Show my location</button></p>
-		<div id="out"></div>
 
