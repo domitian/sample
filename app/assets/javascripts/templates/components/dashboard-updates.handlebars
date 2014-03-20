@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-body">
-{{rec.errand.title}} <font size='1'> <i class='pull-right' {{rec.errand.updated_at}} </i> </font><br>
+<p class="text-primary">{{rec.errand.title}} <font size='1'> <i class='pull-right' {{rec.errand.updated_at}} </i> </font></p>
 
 {{#each attributes in rec.errand.description.attributes}} 
 	{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>

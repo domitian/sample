@@ -37,7 +37,7 @@ Familybook.UserController = Ember.ObjectController.extend({
                 }
             });
         }
-        this.set('newListOrder', b);
+        this.set('newListOrder', b.reverse());
     }.observes('selectedUser'),
 
     actions: {

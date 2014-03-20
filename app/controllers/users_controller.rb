@@ -6,9 +6,11 @@ skip_before_filter :check_for_session, :only => :create
 
   def show
     @location = false
-    if (session[:location] == nil)
+    puts "locationcookie #{session[:location].inspect}"
+    if (session[:location] == nil )
       @location = true
     end
+    puts "#{@location}"
   	render json: User.get_latest_errands(params[:id],@location)
   end
 
@@ -19,7 +21,6 @@ skip_before_filter :check_for_session, :only => :create
     if (@groupid == 0)
       @groupid = Group.create(name: @groupname)
       @groupid = @groupid.id
-      session[:location] = true
     end
   	@user = User.new(name: session[:name],group_id: @groupid,email: session[:email],is_approved: false,record: [])
   	session[:group_id] = @user.group_id
@@ -38,15 +39,20 @@ skip_before_filter :check_for_session, :only => :create
     @user = User.find(params[:id])
     if (@user.is_approved)
       @user.location = @params[:location]
+      @user.save();
+      session[:location]='there'
+      render json: User.get_latest_errands(params[:id],false)
+
     else
       if User.find(@params[:approved_by]).group_id == @user.group_id
         @user.is_approved = @params[:is_approved]
         @user.approved_by = @params[:approved_by]
       end
+      @user.save();
+      render json: @user
     end
-    @user.save();
+
     puts " the groupid is #{@params.inspect}"
-    render json: @user
   end
   private
   	def get_params

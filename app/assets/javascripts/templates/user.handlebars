@@ -1,8 +1,6 @@
 &nbsp; &nbsp;<a href="/home/logout" class="btn btn-primary btn-sm pull-right"> Logout </a>&nbsp; &nbsp;
 <button class='btn btn-danger btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button> 
-{{#if location_set}}
-		{{geoFindMe}}
-{{/if}}
+
  		<hr>
 		{{#if showadderrand}}
 			<div class="panel panel-default">
@@ -35,7 +33,7 @@
 			<div class="panel panel-default">
   			<div class="panel-body">
 
-				<p> {{rec.title}} <font size='1'> <i class='pull-right'> {{rec.updated_at}} </i> </font> </p>
+				<p class="text-primary"> {{rec.title }} <font size='1'> <i class='pull-right'> {{rec.updated_at}} </i> </font> </p>
 
 
 					{{#each attributes in rec.description.attributes}} 
@@ -58,7 +56,7 @@
 				{{#each rec in recordFormat}}
 				<div class="panel panel-default">
 	  			<div class="panel-body">
-					{{rec.errand.title}} on <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font><br>
+					<p class="text-primary">{{rec.errand.title }}  <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font></p>
 
 					{{#each attributes in rec.errand.description.attributes}} 
 						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>

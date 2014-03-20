@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
 			@user.record = @rec.sort_by &:updated_at
 		end
 		@user.location_set = set_location
+		puts "#{@user.location_set}"
+		# @user.group_id = nil #making ember think groupid is null
 		@user
 	end
 
