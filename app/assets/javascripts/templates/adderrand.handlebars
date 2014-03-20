@@ -1,17 +1,33 @@
 <br>
-Title: {{input type="text" value=errandVar.title size="50"}}<hr>
+<form  role="form">
+	<div class="form-group">
+	{{input type="text" value=errandVar.title  placeholder="Title" size="50" class="form-control"}}
+	</div>
+</form>
+
 {{#each data in  errandVar.description.attributes}}
-	{{input type="text" value=data.label placeholder="Label" }}
-	{{input type="text" value=data.value placeholder="value"}} <br>
+<form class="form-inline" role="form">
+	<div class="form-group">
+		{{input type="text" value=data.label placeholder="Label" class="form-control" size="55" }}
+	</div>
+		&nbsp; &nbsp;
+	<div class="form-group">
+		{{input type="text" value=data.value placeholder="Value" class="form-control" size="55"}} 
+	</div>
+</form>
 {{/each}} 
-<span {{action 'addDescriptionAttributes' this on="click"}} <button><i class="fa fa-plus-square-o clearfix fa-2x"></i></button></span>
-<hr>
-Tags: {{input type="text" value=errandVar.tag size="50"}} 
-<hr>
+<span {{action 'addDescriptionAttributes' this on="click"}} <a href="#"><i class="fa fa-plus-square-o clearfix fa-2x"></i></a></span>
+<form  role="form">
+	<div class="form-group">
+		{{input type="text" value=errandVar.tag size="50" placeholder="tags" class="form-control"}} 
+	</div>
+</form>
+<div class="checkbox">
 <label>
   {{view Ember.Checkbox checkedBinding="errandVar.privy"}}
   Only me
-</label> <hr>
+</label>
+</div> <hr>
 
 
 <button class='btn btn-success btn-sm' {{action 'errandStore' on='click' }}> Post </button>
