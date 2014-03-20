@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-	attr_accessor :record, :approval_list
+	attr_accessor :record, :approval_list, :location_set
 	has_many :errands
 	validates :email, uniqueness: {case_sensitive: false}
 	belongs_to :group
-	def self.get_latest_errands(id)
+	store :location, accessors: [:latitude, :longitude], coder: JSON
+	def self.get_latest_errands(id,set_location)
 		@user = User.find(id)
 		if @user.is_approved == true
 
@@ -15,17 +16,17 @@ class User < ActiveRecord::Base
 			@group = @group.where.not(id: id)
 			@rec = []
 			@group.each do |k|
-				@re = k.errands.where(:privy => false)
+				@re = k.errands.order("updated_at DESC").where(:privy => false)
 				@re.each do |p|
 					@rec.push(p)
 				end
 			end
-			@user.errands.each do |k|
+			@user.errands.each do |k|  #must load location errand when no of errands is too large
 				@rec.push(k)
 			end
 			@user.record = @rec.sort_by &:updated_at
 		end
-
+		@user.location_set = set_location
 		@user
 	end
 

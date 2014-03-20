@@ -1,6 +1,11 @@
 <br>
 Title: {{input type="text" value=errandVar.title size="50"}}<hr>
-Description: {{input type="text" value=errandVar.description size="50"}}<hr>
+{{#each data in  errandVar.description.attributes}}
+	{{input type="text" value=data.label placeholder="Label" }}
+	{{input type="text" value=data.value placeholder="value"}} <br>
+{{/each}} 
+<span {{action 'addDescriptionAttributes' this on="click"}} <button><i class="fa fa-plus-square-o clearfix fa-2x"></i></button></span>
+<hr>
 Tags: {{input type="text" value=errandVar.tag size="50"}} 
 <hr>
 <label>

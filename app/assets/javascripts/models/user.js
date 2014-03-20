@@ -11,7 +11,8 @@ Familybook.User = DS.Model.extend({
     approval_list: DS.attr(''),
     is_approved: DS.attr('boolean'),
     approved_by: DS.attr('number'),
-
+    location: DS.attr(''),
+    location_set: DS.attr('boolean'),
     recordFormat: function() {
         var record = this.get('record');
         var userList = this.get('approval_list');
@@ -84,7 +85,36 @@ Familybook.User = DS.Model.extend({
             })
         }
         return arrlist;
-    }.property('uniqueUserList')
+    }.property('uniqueUserList'),
+    geoFindMe: function() {
+        var output = document.getElementById("out");
+
+        var self = this;
+        if (!navigator.geolocation) {
+            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+            return;
+        }
+
+
+        function success(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            self.set('location', {
+                "latitude": latitude,
+                "longitude": longitude
+            });
+            self.save();
+
+        };
+
+        function error() {
+            // output.innerHTML = "Unable to retrieve your location";
+        };
+
+        // output.innerHTML = "<p>Locating…</p>";
+
+        navigator.geolocation.getCurrentPosition(success, error);
+    }.property('')
     // dates: function() {
     //     var errands = this.get('errands');
     //     var record = this.get('recordFormat');

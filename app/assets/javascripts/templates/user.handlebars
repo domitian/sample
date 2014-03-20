@@ -1,4 +1,6 @@
-
+{{#if location_set}}
+		{{geoFindMe}}
+{{/if}}
  		<hr>
 		{{#if showadderrand}}
 			<div class="panel panel-default">
@@ -38,12 +40,20 @@
 			{{#each rec in controller.recentAdded}}
 				<hr>
 				<p> {{rec.title}} <font size='1'> <i class='pull-right'> {{rec.updated_at}} </i> </font> </p>
-					{{#if rec.locate}}
-						{{showLocation rec.errand.location}}
-					{{else}}
 
-						{{rec.description}}  by {{this.name}} &nbsp; &nbsp; tags: {{rec.tag}}
-					{{/if}}
+
+					{{#each attributes in rec.description.attributes}} 
+						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}}&nbsp; &nbsp; <br>
+					{{/each}}
+						 by {{this.name}} &nbsp; &nbsp;
+						 <span > 
+						 	{{#each tags in rec.errand.tag}} 
+						 		<button class='btn btn-default btn-xs pull-right disabled' {{action 'showBy' tags this 'tags' on='click'}}>   
+						 			{{tags}}
+						 		</button>
+						 	{{/each}}
+						 </span>
+
 			{{/each}}	
 			</div>		
 			{{#if defaultView}}
@@ -51,10 +61,11 @@
 				{{#each rec in recordFormat}}
 					<hr>
 					{{rec.errand.title}} on <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font><br>
-					{{#if rec.locate}}
-						{{showLocation rec.errand.location}}
-					{{else}}
-					{{rec.errand.description}} by 
+
+					{{#each attributes in rec.errand.description.attributes}} 
+						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>
+					{{/each}}
+					 by 
 					<a {{action 'showBy' rec.id this 'user' on='click'}}> {{rec.written_by}} </a> &nbsp; &nbsp;
 					 <span > 
 					 	{{#each tags in rec.errand.tag}} 
@@ -63,7 +74,7 @@
 					 		</button>
 					 	{{/each}}
 					 </span>
-					 {{/if}}
+
 				{{/each}}
 			{{else}}
 				{{#if controller.byTags}}

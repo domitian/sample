@@ -3,7 +3,7 @@
 Familybook.Errand = DS.Model.extend({
     title: DS.attr('string'),
     user: DS.belongsTo('user'),
-    description: DS.attr('string'),
+    description: DS.attr(''),
     privy: DS.attr('boolean'),
     location: DS.attr(''),
     tag: DS.attr('string'),

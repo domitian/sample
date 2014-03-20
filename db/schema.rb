@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319134503) do
+ActiveRecord::Schema.define(version: 20140320090838) do
 
   create_table "errands", force: true do |t|
     t.integer  "user_id"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20140319134503) do
     t.datetime "updated_at"
     t.boolean  "privy"
     t.string   "location"
-    t.string   "description"
     t.string   "tag"
     t.integer  "errand_type"
+    t.text     "description"
   end
 
   create_table "groups", force: true do |t|
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140319134503) do
     t.string   "email"
     t.boolean  "is_approved"
     t.integer  "approved_by"
+    t.text     "location"
   end
 
 end

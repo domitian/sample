@@ -46,7 +46,12 @@ Familybook.UserController = Ember.ObjectController.extend({
             this.toggleProp('showadderrand');
             var a = this.store.createRecord('errand', {
                 title: '',
-                description: '',
+                description: {
+                    "attributes": [{
+                        "label": '',
+                        "value": ''
+                    }]
+                },
                 user: user,
                 privy: false,
                 location: '',
@@ -54,6 +59,13 @@ Familybook.UserController = Ember.ObjectController.extend({
                 errand_type: 0
             });
             this.set('errandVar', a);
+
+        },
+        addDescriptionAttributes: function() {
+            var errandVar = this.get('errandVar').get('description').attributes.pushObject({
+                "label": '',
+                "value": ''
+            });
 
         },
         errandCancel: function() {
@@ -130,8 +142,14 @@ Familybook.UserController = Ember.ObjectController.extend({
         },
         geoFindMe: function(user) {
             var output = document.getElementById("out");
-            var recentAdded = this.get('recentAdded');
-            var errands = user.get('errands');
+            // var recentAdded = this.get('recentAdded');
+            // var errands = user.get('errands');
+            // var locationErrand = null;
+            // errands.forEach(function(errand) {
+            //     if (errand.get('errand_type') == 1) {
+            //         locationErrand = errand;
+            //     }
+            // })
             var self = this;
             if (!navigator.geolocation) {
                 output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
@@ -142,31 +160,45 @@ Familybook.UserController = Ember.ObjectController.extend({
             function success(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
-                var errandLocation = self.store.createRecord('errand', {
-                    title: user.get('name') + ' @',
-                    description: '',
-                    user: user,
-                    privy: false,
-                    location: {
-                        "latitude": latitude,
-                        "longitude": longitude
-                    },
-                    tag: 'location',
-                    errand_type: 1
-                });
+                user.location = {
+                    "latitude": latitude,
+                    "longitude": longitude
+                };
+                user.save();
+                // var errandLocation = self.store.createRecord('errand', {
+                //     title: user.get('name') + ' @',
+                //     description: {
+                //         "attributes": [{
+                //             "label": '',
+                //             "value": ''
+                //         }]
+                //     },
+                //     user: user,
+                //     privy: false,
+                //     location: {
+                //         "latitude": latitude,
+                //         "longitude": longitude
+                //     },
+                //     tag: 'location',
+                //     errand_type: 1
+                // });
+                // locationErrand.get('location') = {
+                //     "latitude": latitude,
+                //     "longitude": longitude
+                // }
 
-                errands.addObject(errandLocation);
-                recentAdded.pushObject(errandLocation);
-                console.log('error here');
-                self.set('recentAdded', self.get('recentAdded').reverse());
-                errandLocation.save().then(function(use) {
-                    user.reload();
-                    self.set('recentAdded', []);
-                })
+                // errands.addObject(errandLocation);
+                // recentAdded.pushObject(errandLocation);
+                // console.log('error here');
+                // self.set('recentAdded', self.get('recentAdded').reverse());
+                // errandLocation.save().then(function(use) {
+                //     user.reload();
+                //     self.set('recentAdded', []);
+                // })
             };
 
             function error() {
-                output.innerHTML = "Unable to retrieve your location";
+                // output.innerHTML = "Unable to retrieve your location";
             };
 
             // output.innerHTML = "<p>Locating…</p>";

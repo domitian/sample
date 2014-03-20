@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
         flash[:login_alert] = 'you are logged in'
   			session[:id] = @user.id
   			session[:group_id] = @user.group_id
+
   			redirect_to '/#/user/' + @user.id.to_s
   		end
 
