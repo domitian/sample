@@ -61,12 +61,16 @@ Familybook.UserController = Ember.ObjectController.extend({
             this.set('errandVar', a);
 
         },
-        addDescriptionAttributes: function() {
-            var errandVar = this.get('errandVar').get('description').attributes.pushObject({
+        addDescriptionAttributes: function(obj) {
+
+            var errandVar = this.get('errandVar').get('description').attributes.insertAt(this.get('errandVar').get('description').attributes.indexOf(obj) + 1, {
                 "label": '',
                 "value": ''
             });
 
+        },
+        removeDescriptionAttributes: function(obj) {
+            var errandVar = this.get('errandVar').get('description').attributes.removeAt(this.get('errandVar').get('description').attributes.indexOf(obj));
         },
         errandCancel: function() {
             this.toggleProp('showadderrand');

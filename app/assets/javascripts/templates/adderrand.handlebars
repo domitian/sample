@@ -13,12 +13,15 @@
       {{input type="text" value=data.label placeholder="label" class="form-control" size="60"}} 
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
-  <div class="col-lg-8">
+  <div class="col-lg-9">
     <div class="input-group">
       {{input type="text" value=data.value placeholder="value" class="form-control"  }}
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" {{action 'addDescriptionAttributes' this on="click"}}>
-            <i class="fa fa-plus-square-o fa-1x"></i>
+        <button class="btn btn-default" type="button" {{action 'addDescriptionAttributes' data on="click"}}>
+            <i class="fa fa-plus fa-1x"></i>
+        </button>
+        <button class="btn btn-default" type="button" {{action 'removeDescriptionAttributes' data on="click"}}>
+            <i class="fa fa-minus fa-1x"></i>
         </button>
       </span>
     </div>
