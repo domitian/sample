@@ -6,17 +6,28 @@
 </form>
 
 {{#each data in  errandVar.description.attributes}}
-<form class="form-inline" role="form">
-	<div class="form-group">
-		{{input type="text" value=data.label placeholder="Label" class="form-control" size="55" }}
-	</div>
-		&nbsp; &nbsp;
-	<div class="form-group">
-		{{input type="text" value=data.value placeholder="Value" class="form-control" size="55"}} 
-	</div>
-</form>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+
+      {{input type="text" value=data.label placeholder="label" class="form-control" size="60"}} 
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group">
+      {{input type="text" value=data.value placeholder="value" class="form-control"  }}
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" {{action 'addDescriptionAttributes' this on="click"}}>
+            <i class="fa fa-plus-square-o fa-1x"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+
+</div>
+
 {{/each}} 
-<span {{action 'addDescriptionAttributes' this on="click"}} <a href="#"><i class="fa fa-plus-square-o clearfix fa-2x"></i></a></span>
+<br>
 <form  role="form">
 	<div class="form-group">
 		{{input type="text" value=errandVar.tag size="50" placeholder="tags" class="form-control"}} 

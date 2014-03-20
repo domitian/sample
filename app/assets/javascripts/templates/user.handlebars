@@ -1,7 +1,8 @@
+&nbsp; &nbsp;<a href="/home/logout" class="btn btn-primary btn-sm pull-right"> Logout </a>&nbsp; &nbsp;
+<button class='btn btn-danger btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button> 
 {{#if location_set}}
 		{{geoFindMe}}
 {{/if}}
-			<button class='btn btn-danger btn-lg ' {{action 'refreshRec' this on='click' }}> Refresh </button> 
  		<hr>
 		{{#if showadderrand}}
 			<div class="panel panel-default">
@@ -12,15 +13,14 @@
 		{{else}}
 		<div class="btn-group btn-group-justified">
 			<div class='btn-group'>
-			<button class='btn btn-info btn-lg' {{action 'errandAdd' this on='click' }}> Post Information </button> 
+			<button class='btn btn-warning btn-lg' {{action 'errandAdd' this on='click' }}> Post Information </button> 
 			</div>
 
 		</div>
 		{{/if}}
 		<div id="out"></div>
-		<hr>
 		<div class='pull-right'>
-		<b>Display by </b>{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser}}
+		<b>Display by </b>{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser class="form-control"}}
 		</div>
 		{{#if is_approved}}
 			<hr>
@@ -32,28 +32,32 @@
 
 			<div style="background-color:#E6E6FA" >
 			{{#each rec in controller.recentAdded}}
-				<hr>
+			<div class="panel panel-default">
+  			<div class="panel-body">
+
 				<p> {{rec.title}} <font size='1'> <i class='pull-right'> {{rec.updated_at}} </i> </font> </p>
 
 
 					{{#each attributes in rec.description.attributes}} 
 						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}}&nbsp; &nbsp; <br>
 					{{/each}}
-						 by {{this.name}} &nbsp; &nbsp;
-						 <span > 
-						 	{{#each tags in rec.errand.tag}} 
-						 		<button class='btn btn-default btn-xs pull-right disabled' {{action 'showBy' tags this 'tags' on='click'}}>   
-						 			{{tags}}
-						 		</button>
-						 	{{/each}}
-						 </span>
-
+					by {{this.name}} &nbsp; &nbsp;
+					 <span > 
+					 	{{#each tags in rec.errand.tag}} 
+					 		<button class='btn btn-default btn-xs pull-right disabled' {{action 'showBy' tags this 'tags' on='click'}}>   
+					 			{{tags}}
+					 		</button>
+					 	{{/each}}
+					 </span>
+				</div>
+				</div>						 
 			{{/each}}	
 			</div>		
 			{{#if defaultView}}
 
 				{{#each rec in recordFormat}}
-					<hr>
+				<div class="panel panel-default">
+	  			<div class="panel-body">
 					{{rec.errand.title}} on <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font><br>
 
 					{{#each attributes in rec.errand.description.attributes}} 
@@ -68,7 +72,8 @@
 					 		</button>
 					 	{{/each}}
 					 </span>
-
+					 </div>
+					 </div>
 				{{/each}}
 			{{else}}
 				{{#if controller.byTags}}

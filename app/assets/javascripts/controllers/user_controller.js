@@ -130,7 +130,7 @@ Familybook.UserController = Ember.ObjectController.extend({
                     }
                 });
             }
-            this.set('newListOrder', b);
+            this.set('newListOrder', b.reverse());
             // return b.reverse();
         },
         backToDefault: function(user) {
