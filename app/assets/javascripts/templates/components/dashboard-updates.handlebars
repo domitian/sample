@@ -1,18 +1,26 @@
-<div class="panel panel-default">
-	<div class="panel-body">
-<p class="text-primary">{{rec.errand.title}} <font size='1'> <i class='pull-right' {{rec.errand.updated_at}} </i> </font></p>
+				<div class="panel panel-default" draggable="true"{{action "dragForPriority" rec this on="dragStart" target="view"}}>
+	  			<div class="panel-body">
+					<div class="row">
+					  <div class="col-lg-1">
+					  	<i class="fa fa-user fa-5x" {{bind-attr style="rec.color"}}></i>
+					  </div>
+					  <div class="col-lg-11">
+					<h4>{{rec.errand.title }}  <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font></h4>
 
-{{#each attributes in rec.errand.description.attributes}} 
-	{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>
-{{/each}}
-by {{rec.written_by}} &nbsp; &nbsp;
- <span > 
- 	{{#each tags in rec.errand.tag}} 
- 		<button class='btn btn-default btn-xs pull-right disabled' {{action 'showBy' tags this 'tags' on='click'}}>   
- 			{{tags}}
- 		</button>
- 	{{/each}}
- </span>
-
-</div>
-</div>
+					{{#each attributes in rec.errand.description.attributes}} 
+						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>
+					{{/each}}
+					 by 
+					<font size="1" class='pull-right'> posted by <a {{action 'showBy' rec.id this 'user' on='click'}} > {{rec.written_by}} </a></font>
+					 &nbsp; &nbsp;
+					 <span > 
+					 	{{#each tags in rec.errand.tag}} 
+					 		<button class='btn btn-default btn-xs pull-right' {{action 'showBy' tags this 'tags' on='click'}}>   
+					 			{{tags}}
+					 		</button>
+					 	{{/each}}
+					 </span>
+					 </div>
+					 </div>
+					 </div>
+					 </div>

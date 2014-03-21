@@ -22,10 +22,10 @@ Familybook.UserView = Ember.View.extend({
     //     });
     // },
     actions: {
-        dragForPriority: function(errand, user) {
-            var errandList = user.get('recordFormat');
-            console.log(errandList.indexOf(errand));
-        }
+        // dragForPriority: function(errand, user) {
+        //     var errandList = user.get('recordFormat');
+        //     console.log(errandList.indexOf(errand));
+        // }
     },
     errandView: Ember.View.extend({
         templateName: 'adderrand',
@@ -33,5 +33,16 @@ Familybook.UserView = Ember.View.extend({
     }),
     dashboardView: Ember.View.extend({
         templateName: 'dashboard',
+        dragStart: function(evt) {
+            console.log('draggable');
+            console.log(evt);
+        },
+        drag: function(evt) {
+            console.log('dropping');
+        },
+        dragOver: function(evt) {
+            evt.preventDefault();
+            console.log('dropover');
+        }
     })
 });

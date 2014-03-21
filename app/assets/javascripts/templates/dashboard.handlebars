@@ -10,11 +10,12 @@
 					{{#each attributes in rec.errand.description.attributes}} 
 						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>
 					{{/each}}
-					 by 
-					<a {{action 'showBy' rec.id this 'user' on='click'}}> {{rec.written_by}} </a> &nbsp; &nbsp;
+					
+					<font size="1" class="pull-right"> posted by <a {{action 'showBy' rec.id this 'user' on='click'}} > {{rec.written_by}} </a>  </font>
+					&nbsp; &nbsp;
 					 <span > 
 					 	{{#each tags in rec.errand.tag}} 
-					 		<button class='btn btn-default btn-xs pull-right' {{action 'showBy' tags this 'tags' on='click'}}>   
+					 		<button class='btn btn-default btn-xs pull-left' {{action 'showBy' tags this 'tags' on='click'}}>   
 					 			{{tags}}
 					 		</button>
 					 	{{/each}}

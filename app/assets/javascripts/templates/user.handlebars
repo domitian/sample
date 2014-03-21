@@ -55,9 +55,7 @@
 
 				{{#each rec in recordFormat}}
 
-						{{view view.dashboardView}}
-					 
-					 
+						{{view view.dashboardView}}				 
 					 
 				{{/each}}
 			{{else}}
@@ -76,31 +74,5 @@
 		 	<div class="alert alert-success">You need to be approved by family </div>	
 		 {{/if}}
 		 <hr>
-{{#each rec in controller.droppableRecord}}
-				<div class="panel panel-default" >
-	  			<div class="panel-body">
-					<div class="row">
-					  <div class="col-lg-1">
-					  	<i class="fa fa-user fa-5x"></i>
-					  </div>
-					  <div class="col-lg-11">
-					<p>{{rec.errand.title }}  <font size='1'><i class='pull-right' {{rec.errand.updated_at}} </i> </font></p>
 
-					{{#each attributes in rec.errand.description.attributes}} 
-						{{attributes.label}}&nbsp; &nbsp; {{attributes.value}} <br>
-					{{/each}}
-					 by 
-					<a {{action 'showBy' rec.id this 'user' on='click'}}> {{rec.written_by}} </a> &nbsp; &nbsp;
-					 <span > 
-					 	{{#each tags in rec.errand.tag}} 
-					 		<button class='btn btn-default btn-xs pull-right' {{action 'showBy' tags this 'tags' on='click'}}>   
-					 			{{tags}}
-					 		</button>
-					 	{{/each}}
-					 </span>
-					 </div>
-					 </div>
-					 </div>
-					 </div>
-{{/each}}
 
