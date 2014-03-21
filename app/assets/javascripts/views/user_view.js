@@ -30,5 +30,8 @@ Familybook.UserView = Ember.View.extend({
     errandView: Ember.View.extend({
         templateName: 'adderrand',
 
+    }),
+    dashboardView: Ember.View.extend({
+        templateName: 'dashboard',
     })
 });

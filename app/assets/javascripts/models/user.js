@@ -34,9 +34,7 @@ Familybook.User = DS.Model.extend({
                 if (typeof item.updated_at != 'object') {
                     item.updated_at = new Date(item.updated_at);
                 }
-                console.log(item);
                 item.tag = item.tag.replace(/ /g, "");
-                console.log('the value of tags is ' + item.tag);
 
                 item.tag = item.tag.split(',');
                 if (item.errand_type == 1) {
