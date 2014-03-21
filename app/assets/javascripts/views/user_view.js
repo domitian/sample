@@ -21,6 +21,12 @@ Familybook.UserView = Ember.View.extend({
 
     //     });
     // },
+    actions: {
+        dragForPriority: function(errand, user) {
+            var errandList = user.get('recordFormat');
+            console.log(errandList.indexOf(errand));
+        }
+    },
     errandView: Ember.View.extend({
         templateName: 'adderrand',
 

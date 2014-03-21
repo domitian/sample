@@ -8,6 +8,7 @@ Familybook.UserController = Ember.ObjectController.extend({
     defaultView: true,
     byTags: true,
     selectedUser: 0,
+    droppableRecord: [],
     toggleProp: function(prop) {
         this.toggleProperty(prop);
     },
@@ -58,6 +59,9 @@ Familybook.UserController = Ember.ObjectController.extend({
                 tag: '',
                 errand_type: 0
             });
+            // user.get('errands').then(function(errands) {
+            //     errands.pushObject(a);
+            // })
             this.set('errandVar', a);
 
         },
@@ -77,11 +81,15 @@ Familybook.UserController = Ember.ObjectController.extend({
             this.get('errandVar').deleteRecord();
         },
         errandStore: function(user) {
-
-            this.get('errands').addObject(this.get('errandVar'));
-            this.get('recentAdded').pushObject(this.get('errandVar'));
-            this.set('recentAdded', this.get('recentAdded').reverse());
-            this.get('errandVar').save();
+            this.get('errandVar').set("user", user);
+            // user.get('errands').pushObject(this.get('errandVar'));
+            // this.get('recentAdded').pushObject(this.get('errandVar'));
+            // this.set('recentAdded', this.get('recentAdded').reverse());
+            var self = this;
+            this.get('errandVar').save().then(function(errand) {
+                user.reload();
+                console.log('user is saved');
+            })
             this.toggleProp('showadderrand');
             // this.reload();
             // this.

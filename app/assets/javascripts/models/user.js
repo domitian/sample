@@ -15,37 +15,50 @@ Familybook.User = DS.Model.extend({
     location_set: DS.attr('boolean'),
     recordFormat: function() {
         var record = this.get('record');
+        var colorList = ["#6C3BA1", "#F2101F", "#CEC1C2", "#2525C6", "#25BBC6", "#25C640", "#D05520", "#E6DC1C"]
         var userList = this.get('approval_list');
         var shortList = {}; //storing the userlist in a short form for easier access
+        var colorOfUser = {};
         if (userList == null) {
             userList = [];
         }
-        userList.forEach(function(user) {
-            shortList[user.id] = user.name
+        console.log('error at step1 rf');
+        userList.forEach(function(user, index) {
+            shortList[user.id] = user.name;
+            colorOfUser[user.id] = colorList[index];
         });
+
         var b = [];
         if (record != null) {
             record.forEach(function(item) {
-                item.updated_at = new Date(item.updated_at);
+                if (typeof item.updated_at != 'object') {
+                    item.updated_at = new Date(item.updated_at);
+                }
+                console.log(item);
                 item.tag = item.tag.replace(/ /g, "");
+                console.log('the value of tags is ' + item.tag);
+
                 item.tag = item.tag.split(',');
                 if (item.errand_type == 1) {
                     b.push({
                         'locate': true,
                         'written_by': shortList[item.user_id],
                         'errand': item,
-                        'id': item.user_id
+                        'id': item.user_id,
+                        "color": "color:" + colorOfUser[item.user_id] + ";"
                     });
                 } else {
                     b.push({
                         'locate': false,
                         'written_by': shortList[item.user_id],
                         'errand': item,
-                        'id': item.user_id
+                        'id': item.user_id,
+                        "color": "color:" + colorOfUser[item.user_id] + ";"
                     });
                 }
             });
         }
+        console.log(' running inside recordformat')
         return b.reverse();
     }.property('record'),
     unApproved: function() {
