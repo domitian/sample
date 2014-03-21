@@ -15,18 +15,9 @@ Familybook.User = DS.Model.extend({
     location_set: DS.attr('boolean'),
     recordFormat: function() {
         var record = this.get('record');
-        var colorList = ["#6C3BA1", "#F2101F", "#CEC1C2", "#2525C6", "#25BBC6", "#25C640", "#D05520", "#E6DC1C"]
-        var userList = this.get('approval_list');
-        var shortList = {}; //storing the userlist in a short form for easier access
-        var colorOfUser = {};
-        if (userList == null) {
-            userList = [];
-        }
-        console.log('error at step1 rf');
-        userList.forEach(function(user, index) {
-            shortList[user.id] = user.name;
-            colorOfUser[user.id] = colorList[index];
-        });
+        var uniqueUserList = this.get('uniqueUserList');
+        var shortList = uniqueUserList[0];
+        var colorOfUser = uniqueUserList[1];
 
         var b = [];
         if (record != null) {
@@ -73,17 +64,22 @@ Familybook.User = DS.Model.extend({
     }.property('approval_list'),
     uniqueUserList: function() {
         var userList = this.get('approval_list');
+        var colorList = ["#6C3BA1", "#F2101F", "#CEC1C2", "#2525C6", "#25BBC6", "#25C640", "#D05520", "#E6DC1C"]
         var shortList = {}; //storing the userlist in a short form for easier access
+        var colorOfUser = {};
+
         if (userList == null) {
             userList = [];
         }
-        userList.forEach(function(user) {
-            shortList[user.id] = user.name
+        userList.forEach(function(user, index) {
+            shortList[user.id] = user.name;
+            colorOfUser[user.id] = colorList[index];
         });
-        return shortList;
+        return [shortList, colorOfUser];
     }.property('approval_list'),
     uniqueUserListHash: function() {
-        var list = this.get('uniqueUserList');
+        var uniqueUserList = this.get('uniqueUserList');
+        var list = uniqueUserList[0];
         var arrlist = [];
         arrlist.push({
             id: 0,

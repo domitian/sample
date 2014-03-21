@@ -16,7 +16,9 @@ Familybook.UserController = Ember.ObjectController.extend({
 
         var record = this.get('record');
         this.set('byTags', false);
-        var shortList = this.get('uniqueUserList');
+        var uniqueUserList = this.get('uniqueUserList');
+        var shortList = uniqueUserList[0];
+        var colorOfUser = uniqueUserList[1];
         var b = [];
         var self = this;
         var selectedUser = this.get('selectedUser')
@@ -30,7 +32,8 @@ Familybook.UserController = Ember.ObjectController.extend({
                         b.push({
                             'written_by': shortList[item.user_id],
                             'errand': item,
-                            'id': item.user_id
+                            'id': item.user_id,
+                            "color": "color:" + colorOfUser[item.user_id] + ";"
                         });
                     }
                 } else {
@@ -116,7 +119,9 @@ Familybook.UserController = Ember.ObjectController.extend({
                 this.set('recentAdded', []);
             }
             var record = this.get('record');
-            var shortList = this.get('uniqueUserList');
+            var uniqueUserList = this.get('uniqueUserList');
+            var shortList = uniqueUserList[0];
+            var colorOfUser = uniqueUserList[1];
             var b = [];
             console.log('no problem here');
             if (record != null) {
@@ -127,7 +132,8 @@ Familybook.UserController = Ember.ObjectController.extend({
                             b.push({
                                 'written_by': shortList[item.user_id],
                                 'errand': item,
-                                'id': item.user_id
+                                'id': item.user_id,
+                                "color": "color:" + colorOfUser[item.user_id] + ";"
                             });
                         }
                     } else if (showType == 'user') {
@@ -136,7 +142,8 @@ Familybook.UserController = Ember.ObjectController.extend({
                             b.push({
                                 'written_by': shortList[item.user_id],
                                 'errand': item,
-                                'id': item.user_id
+                                'id': item.user_id,
+                                "color": "color:" + colorOfUser[item.user_id] + ";"
                             });
                         }
                     }

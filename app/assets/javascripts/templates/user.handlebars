@@ -1,7 +1,7 @@
-&nbsp; &nbsp;<a href="/home/logout" class="btn btn-primary btn-sm pull-right"> Logout </a>&nbsp; &nbsp;
-<button class='btn btn-danger btn-sm pull-right' {{action 'refreshRec' this on='click' }}> Refresh </button> 
+&nbsp; &nbsp;<a href="/home/logout" class="btn btn-default btn-sm pull-right"> Logout </a>&nbsp; &nbsp;
+<button class='btn btn-default btn-sm pull-right' {{action 'refreshRec' this on='click' }}> <i class="fa fa-refresh"></i> </button> 
 
- 		<hr>
+ 		
 		{{#if showadderrand}}
 			<div class="panel panel-default">
 			<div class="panel-body">
@@ -17,11 +17,12 @@
 		</div>
 		{{/if}}
 		<div id="out"></div>
-		<div class='pull-right'>
-		<b>Display by </b>{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser class="form-control"}}
+		<div >
+			<p><b>Display by </b>{{view Ember.Select content=uniqueUserListHash  optionValuePath="content.id" optionLabelPath="content.username" value=selectedUser class="form-control"}}</p>
 		</div>
+
 		{{#if is_approved}}
-			<hr>
+			
 			<div  >
 				{{#each rec in unApproved}}
 					<div class='alert alert-danger'> Does  {{rec.name}} belong to your family? if yes, <button class='btn btn-success btn-sm' {{action 'approveUser' rec on='click'}}> Approve </button> </div>
@@ -66,7 +67,7 @@
 				{{/if}}
 				<hr>
 				{{#each rec in controller.newListOrder}}
-					{{dashboard-updates rec=rec}}
+					{{view view.dashboardView}}
 				{{/each}}
 			{{/if}}
 

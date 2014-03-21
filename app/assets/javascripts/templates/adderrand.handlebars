@@ -13,19 +13,23 @@
       {{input type="text" value=data.label placeholder="label" class="form-control" size="60"}} 
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
-  <div class="col-lg-9">
+  <div class="col-lg-7">
     <div class="input-group">
-      {{input type="text" value=data.value placeholder="value" class="form-control"  }}
+      {{input type="text" value=data.value placeholder="value" class="form-control" size="80" }}
+
+    </div>
+  </div>
+
+  <div class="col-lg-2">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" {{action 'addDescriptionAttributes' data on="click"}}>
+        <button class="btn btn-primary " type="button" {{action 'addDescriptionAttributes' data on="click"}}>
             <i class="fa fa-plus fa-1x"></i>
         </button>
-        <button class="btn btn-default" type="button" {{action 'removeDescriptionAttributes' data on="click"}}>
+        <button class="btn btn-danger" type="button" {{action 'removeDescriptionAttributes' data on="click"}}>
             <i class="fa fa-minus fa-1x"></i>
         </button>
       </span>
     </div>
-  </div>
 
 </div>
 
