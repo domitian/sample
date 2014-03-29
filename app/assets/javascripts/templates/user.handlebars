@@ -56,7 +56,7 @@
 
 				{{#each rec in recordFormat}}
 
-						{{view view.dashboardView}}				 
+						{{view view.dashboardView contentBinding="rec"}}				 
 					 
 				{{/each}}
 			{{else}}
@@ -75,5 +75,10 @@
 		 	<div class="alert alert-success">You need to be approved by family </div>	
 		 {{/if}}
 		 <hr>
+
+		 {{#each rec in view.duplicateDrag}}
+		 	i am there
+		 	{{view view.dashboardView}}
+		 {{/each}}
 
 
